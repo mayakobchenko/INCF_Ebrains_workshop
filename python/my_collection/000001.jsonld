@@ -1,0 +1,10 @@
+{
+  "@context": {
+    "@vocab": "https://openminds.om-i.org/props/"
+  },
+  "@id": "_:000001",
+  "@type": "https://openminds.om-i.org/types/Organization",
+  "fullName": "Metro-Goldwyn-Mayer Studios, Inc.",
+  "homepage": "https://www.mgm.com",
+  "shortName": "MGM"
+}

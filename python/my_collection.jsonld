@@ -1,0 +1,44 @@
+{
+  "@context": {
+    "@vocab": "https://openminds.om-i.org/props/"
+  },
+  "@graph": [
+    {
+      "@id": "_:000000",
+      "@type": "https://openminds.om-i.org/types/Person",
+      "affiliation": [
+        {
+          "@type": "https://openminds.om-i.org/types/Affiliation",
+          "memberOf": {
+            "@id": "_:000001"
+          },
+          "startDate": "1942-01-01"
+        }
+      ],
+      "familyName": "Laurel",
+      "givenName": "Stan"
+    },
+    {
+      "@id": "_:000001",
+      "@type": "https://openminds.om-i.org/types/Organization",
+      "fullName": "Metro-Goldwyn-Mayer Studios, Inc.",
+      "homepage": "https://www.mgm.com",
+      "shortName": "MGM"
+    },
+    {
+      "@id": "_:000002",
+      "@type": "https://openminds.om-i.org/types/Person",
+      "affiliation": [
+        {
+          "@type": "https://openminds.om-i.org/types/Affiliation",
+          "memberOf": {
+            "@id": "_:000001"
+          },
+          "startDate": "1942-01-01"
+        }
+      ],
+      "familyName": "Hardy",
+      "givenName": "Oliver"
+    }
+  ]
+}

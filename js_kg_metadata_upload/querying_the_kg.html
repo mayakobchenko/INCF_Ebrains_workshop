@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>KG javascript Tutorial</title>
+  <link href="styles.css" rel="stylesheet" />
+  <script src="main.js"></script>
+  <script>
+    window.onload = (event) => {
+      searchView();
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Querying the EBRAINS Knowledge Graph</h1>
+
+  <div id="errorMessages"></div>
+
+  <div id="form">
+    <label for="searchTerm">Search: </label>
+    <input id="searchTerm" type="text" size="40" />
+    <button type="button" id="searchButton">Search for datasets</button>
+  </div>
+
+  <div id="results"></div>
+
+</body>
+
+</html>

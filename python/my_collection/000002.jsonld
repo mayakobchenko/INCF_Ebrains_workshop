@@ -1,0 +1,18 @@
+{
+  "@context": {
+    "@vocab": "https://openminds.om-i.org/props/"
+  },
+  "@id": "_:000002",
+  "@type": "https://openminds.om-i.org/types/Person",
+  "affiliation": [
+    {
+      "@type": "https://openminds.om-i.org/types/Affiliation",
+      "memberOf": {
+        "@id": "_:000001"
+      },
+      "startDate": "1942-01-01"
+    }
+  ],
+  "familyName": "Hardy",
+  "givenName": "Oliver"
+}
