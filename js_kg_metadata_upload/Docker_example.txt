@@ -1,0 +1,28 @@
+# discussoin with Arda
+# runing fairgraph python package from node server in wizard
+
+FROM python:3.12-slim  - > using this bit as a python interpreter, eg could be 3.10 wherever the package is supported for fairgraph?
+
+WORKDIR /app
+
+# Install Node.js
+RUN apt-get update && \
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies -> this will likely have a requirements.txt that has at least fairgraph + everything else you use
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install Node.js dependencies
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 6000
+
+# Run Node.js server, not the python
+CMD ["node", "server.js"]

@@ -1,0 +1,66 @@
+talk to Arda:
+dump the send_jsonto_openminds.py in the same dir and copy alongside in the dockerfile
+have Python available for executing scripts via exec() or spawn()
+
+
+docker file: 
+FROM python:3.12-slim  - > using this bit as a python interpreter, eg could be 3.10 wherever the package is supported for fairgraph?
+
+WORKDIR /app
+
+# Install Node.js
+RUN apt-get update && \
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies -> this will likely have a requirements.txt that has at least fairgraph + everything else you use
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install Node.js dependencies
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 6000
+
+# Run Node.js server, not the python
+CMD ["node", "server.js"]
+
+
+
+
+
+const express = require('express');
+const { exec, spawn } = require('child_process');
+const app = express();
+
+app.use(express.json());
+
+app.post('/process-data', async (req, res) => {
+    const jsonData = JSON.stringify(req.body);
+    
+    // Execute Python script directly
+    const command = `python scripts/domystuff.py -p '${jsonData}'`;
+    
+    exec(command, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error: ${error}`);
+            return res.status(500).json({ error: 'Python script failed' });
+        }
+        
+        if (stderr) {
+            console.error(`Stderr: ${stderr}`);
+        }
+        
+        try {
+            const result = JSON.parse(stdout);
+            res.json(result);
+        } catch (e) {
+            res.json({ output: stdout });
+        }
+    });
+});
